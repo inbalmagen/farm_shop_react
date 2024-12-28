@@ -5,13 +5,13 @@ import {
   useLoaderData,
   useNavigate,
 } from "react-router-dom";
-import customFetch from "../axios/custom";
+import { getAxiosInstance } from "../axios/custom";
 import { nanoid } from "nanoid";
 import { formatDate } from "../utils/formatDate";
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   const { id } = params;
-  const response = await customFetch(`orders/${id}`);
+  const response = await getAxiosInstance()(`orders/${id}`);
   return response.data;
 };
 
@@ -35,9 +35,9 @@ const SingleOrderHistory = () => {
           Order ID: {singleOrder.id}
         </h2>
         <p className="mb-2">Date: {formatDate(singleOrder.orderDate)}</p>
-        <p className="mb-2">Subtotal: ${ singleOrder.subtotal }</p>
+        <p className="mb-2">Subtotal: ${singleOrder.subtotal}</p>
         <p className="mb-2">Shipping: $5</p>
-        <p className="mb-2">Tax: ${ singleOrder.subtotal / 5 }</p>
+        <p className="mb-2">Tax: ${singleOrder.subtotal / 5}</p>
         <p className="mb-2">
           Total: $
           {(singleOrder.subtotal + 5 + singleOrder.subtotal / 5).toFixed(2)}
@@ -55,7 +55,7 @@ const SingleOrderHistory = () => {
           <tbody>
             {singleOrder.products.map((product) => (
               <tr key={nanoid()}>
-                <td className="py-3 px-4 border-b">{product?.title}</td>
+                <td className="py-3 px-4 border-b">{product?.name}</td>
                 <td className="py-3 px-4 border-b text-center">
                   {product?.quantity}
                 </td>

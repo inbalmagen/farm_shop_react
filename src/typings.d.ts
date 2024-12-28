@@ -1,9 +1,12 @@
 interface Product {
   id: string;
-  title: string;
-  image: string;
-  category: string;
+  name: string;
+  description: string;
+  img: string;
+  is_deleted: boolean;
+  status: string;
   price: number;
+  category: string;
   popularity: number;
   stock: number;
 }

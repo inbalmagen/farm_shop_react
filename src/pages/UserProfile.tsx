@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Button from "../components/Button";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import customFetch from "../axios/custom";
+import { getAxiosInstance } from "../axios/custom";
 import { checkUserProfileFormData } from "../utils/checkUserProfileFormData";
 import { setLoginStatus } from "../features/auth/authSlice";
 import { store } from "../store";
@@ -19,7 +19,7 @@ const UserProfile = () => {
   };
 
   const fetchUser = async (userId: number | string) => {
-    const response = await customFetch(`/users/${userId}`);
+    const response = await getAxiosInstance()(`/users/${userId}`);
     setUser(response.data);
   };
 
@@ -33,7 +33,7 @@ const UserProfile = () => {
     const userId = JSON.parse(localStorage.getItem("user") || "{}").id;
     if (userId) {
       try {
-        await customFetch.put(`/users/${userId}`, data);
+        await getAxiosInstance().put(`/users/${userId}`, data);
       } catch (e) {
         toast.error("User update failed");
         return;

@@ -1,5 +1,5 @@
 import React, { ReactElement, useCallback, useEffect, useState } from "react";
-import customFetch from "../axios/custom";
+import { getAxiosInstance } from "../axios/custom";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import {
   setShowingProducts,
@@ -34,17 +34,19 @@ const ProductGridWrapper = ({
       if (!query || query.length === 0) {
         query = "";
       }
-      const response = await customFetch("/products");
+      const response = await getAxiosInstance()("/products/");
       const allProducts = await response.data;
-      let searchedProducts = allProducts.filter((product: Product) =>
-        product.title.toLowerCase().includes(query.toLowerCase())
-      );
+      let searchedProducts = allProducts;
+      console.log(allProducts);
+      // let searchedProducts = allProducts.filter((product: Product) =>
+      //   product.name.toLowerCase().includes(query.toLowerCase())
+      // );
 
-      if (category) {
-        searchedProducts = searchedProducts.filter((product: Product) => {
-          return product.category === category;
-        });
-      }
+      // if (category) {
+      //   searchedProducts = searchedProducts.filter((product: Product) => {
+      //     return product.category === category;
+      //   });
+      // }
 
       if (totalProducts !== searchedProducts.length) {
         dispatch(setTotalProducts(searchedProducts.length));

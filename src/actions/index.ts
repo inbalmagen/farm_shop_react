@@ -1,5 +1,5 @@
 import { redirect } from "react-router-dom";
-import customFetch from "../axios/custom";
+import { getAxiosInstance } from "../axios/custom";
 
 interface SearchActionRequest {
   request: {
@@ -22,10 +22,9 @@ export const searchAction = async ({ request }: SearchActionRequest) => {
   return redirect(`/search?query=${data?.searchInput || ""}`);
 };
 
-
-export const checkoutAction = async ({request} : CheckoutFormAction) => {
+export const checkoutAction = async ({ request }: CheckoutFormAction) => {
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
-  const response = await customFetch.post("/orders", data);
-  return redirect('/');
-}
+  const response = await getAxiosInstance().post("/orders", data);
+  return redirect("/");
+};

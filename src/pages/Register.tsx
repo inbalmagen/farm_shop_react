@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "../components";
 import { checkRegisterFormData } from "../utils/checkRegisterFormData";
-import customFetch from "../axios/custom";
+import { getAxiosInstance } from "../axios/custom";
 import toast from "react-hot-toast";
 
 const Register = () => {
@@ -16,7 +16,7 @@ const Register = () => {
     if (!checkRegisterFormData(data)) return;
 
     // Check if user with this email already exists
-    const users = await customFetch.get("/users");
+    const users = await getAxiosInstance().get("/users");
     const userExists = users.data.some(
       (user: { email: string }) => user.email === data.email
     );
@@ -26,7 +26,7 @@ const Register = () => {
     }
 
     // Register user
-    const response = await customFetch.post("/users", data);
+    const response = await getAxiosInstance().post("/users", data);
     if (response.status === 201) {
       toast.success("User registered successfully");
       navigate("/login");

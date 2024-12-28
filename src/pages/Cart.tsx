@@ -35,8 +35,8 @@ const Cart = () => {
                 <li key={product.id} className="flex py-6 sm:py-10">
                   <div className="flex-shrink-0">
                     <img
-                      src={`/src/assets/${product.image}`}
-                      alt={product.title}
+                      src={`/src/assets/${product.img}`}
+                      alt={product.name}
                       className="h-24 w-24 object-cover object-center sm:h-48 sm:w-48"
                     />
                   </div>
@@ -50,7 +50,7 @@ const Cart = () => {
                               to={`/product/${product.id}`}
                               className="font-medium text-gray-700 hover:text-gray-800"
                             >
-                              {product.title}
+                              {product.name}
                             </Link>
                           </h3>
                         </div>
@@ -88,11 +88,12 @@ const Cart = () => {
                           <button
                             type="button"
                             className="-m-2 inline-flex p-2 text-gray-400 hover:text-gray-500"
-                            onClick={() =>{
+                            onClick={() => {
                               dispatch(
                                 removeProductFromTheCart({ id: product?.id })
-                              ); toast.error("Product removed from the cart");}
-                            }
+                              );
+                              toast.error("Product removed from the cart");
+                            }}
                           >
                             <span className="sr-only">Remove</span>
                             <XMarkIcon className="h-5 w-5" aria-hidden="true" />

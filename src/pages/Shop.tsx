@@ -1,26 +1,23 @@
 import {
   LoaderFunctionArgs,
-  useLoaderData,
-  useSearchParams,
+  // useLoaderData,
+  // useSearchParams,
 } from "react-router-dom";
 import { ShopBanner, ShopPageContent } from "../components";
 
 export const shopCategoryLoader = async ({ params }: LoaderFunctionArgs) => {
-  const { category } = params;
+  const category = "all";
 
   return category;
 };
 
 const Shop = () => {
-  const category = useLoaderData() as string;
-  const [searchParams] = useSearchParams();
+  // const category = useLoaderData() as string;
+  // const [searchParams] = useSearchParams();
   return (
     <div className="max-w-screen-2xl mx-auto pt-10">
-      <ShopBanner category={category} />
-      <ShopPageContent
-        category={category}
-        page={parseInt(searchParams.get("page") || "1")}
-      />
+      <ShopBanner category="all" />
+      <ShopPageContent category="all" page={parseInt("1")} />
     </div>
   );
 };

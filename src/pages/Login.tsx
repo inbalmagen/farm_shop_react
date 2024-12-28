@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "../components";
 import { checkLoginFormData } from "../utils/checkLoginFormData";
-import customFetch from "../axios/custom";
+import { getAxiosInstance } from "../axios/custom";
 import toast from "react-hot-toast";
 import { useEffect } from "react";
 import { setLoginStatus } from "../features/auth/authSlice";
@@ -17,29 +17,57 @@ const Login = () => {
     const data = Object.fromEntries(formData);
     // Check if form data is valid
     if (!checkLoginFormData(data)) return;
-    
-    // Check if user with the email and password exists
-    const users = await customFetch.get("/users");
-    let userId: number = 0; // Initialize userId with a default value
-    const userExists = users.data.some(
-      (user: { id: number; email: string; password: string }) => {
-        if (user.email === data.email) {
-          userId = user.id;
-        }
-        return user.email === data.email && user.password === data.password;
-      }
-    );
-    
-    // if user exists, show success message
-    if (userExists) {
-      toast.success("You logged in successfully");
-      localStorage.setItem("user", JSON.stringify({...data, id: userId}));
+
+    try {
+      // Login request
+      const loginResponse = await getAxiosInstance().post(`/login/`, {
+        username: data.email,
+        password: data.password,
+      });
+
+      // Store access token and role in localStorage
+      const token = loginResponse.data.access;
+      const isStaff = loginResponse.data.is_staff;
+      localStorage.setItem("access_token", token);
+      localStorage.setItem("user_role", isStaff ? "manager" : "customer");
       store.dispatch(setLoginStatus(true));
-      navigate("/user-profile");
-      return;
-    } else {
+
+      // Redirect based on role
+      toast.success("You logged in successfully");
+      if (isStaff) {
+        navigate("/shop");
+        // window.location.href = "admin_products.html";
+      } else {
+        navigate("/shop");
+        // window.location.href = "customer_products.html";
+      }
+    } catch (error) {
+      console.error("Error:", error);
       toast.error("Please enter correct email and password");
     }
+
+    // Check if user with the email and password exists
+    //   const users = await customFetch.get("/users");
+    //   let userId: number = 0; // Initialize userId with a default value
+    //   const userExists = users.data.some(
+    //     (user: { id: number; email: string; password: string }) => {
+    //       if (user.email === data.email) {
+    //         userId = user.id;
+    //       }
+    //       return user.email === data.email && user.password === data.password;
+    //     }
+    //   );
+
+    //   // if user exists, show success message
+    //   if (userExists) {
+    //     toast.success("You logged in successfully");
+    //     localStorage.setItem("user", JSON.stringify({ ...data, id: userId }));
+    //     store.dispatch(setLoginStatus(true));
+    //     navigate("/user-profile");
+    //     return;
+    //   } else {
+    //     toast.error("Please enter correct email and password");
+    //   }
   };
 
   useEffect(() => {
@@ -63,7 +91,7 @@ const Login = () => {
           <div className="flex flex-col gap-1">
             <label htmlFor="name">Your email</label>
             <input
-              type="email"
+              type="string"
               className="bg-white border border-black text-xl py-2 px-3 w-full outline-none max-[450px]:text-base"
               placeholder="Enter email address"
               name="email"

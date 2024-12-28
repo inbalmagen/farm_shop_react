@@ -2,7 +2,7 @@ import { HiTrash as TrashIcon } from "react-icons/hi2";
 import { Button } from "../components";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import { removeProductFromTheCart } from "../features/cart/cartSlice";
-import customFetch from "../axios/custom";
+import { getAxiosInstance } from "../axios/custom";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { checkCheckoutFormData } from "../utils/checkCheckoutFormData";
@@ -52,7 +52,7 @@ const Checkout = () => {
 
     let response;
     if (JSON.parse(localStorage.getItem("user") || "{}").email) {
-      response = await customFetch.post("/orders", {
+      response = await getAxiosInstance().post("/orders", {
         ...checkoutData,
         user: {
           email: JSON.parse(localStorage.getItem("user") || "{}").email,
@@ -62,7 +62,7 @@ const Checkout = () => {
         orderDate: new Date().toISOString(),
       });
     } else {
-      response = await customFetch.post("/orders", {
+      response = await getAxiosInstance().post("/orders", {
         ...checkoutData,
         orderStatus: "Processing",
         orderDate: new Date().toLocaleDateString(),
@@ -439,8 +439,8 @@ const Checkout = () => {
                   <li key={product?.id} className="flex px-4 py-6 sm:px-6">
                     <div className="flex-shrink-0">
                       <img
-                        src={`/src/assets/${product?.image}`}
-                        alt={product?.title}
+                        src={`/src/assets/${product?.img}`}
+                        alt={product?.name}
                         className="w-20 rounded-md"
                       />
                     </div>
@@ -449,7 +449,7 @@ const Checkout = () => {
                       <div className="flex">
                         <div className="min-w-0 flex-1">
                           <h4 className="text-sm font-medium text-gray-700 hover:text-gray-800">
-                            {product?.title}
+                            {product?.name}
                           </h4>
                           <p className="mt-1 text-sm text-gray-500">
                             {product?.color}

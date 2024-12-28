@@ -1,6 +1,7 @@
 import React from "react";
 import ProductItem from "./ProductItem";
 import { nanoid } from "nanoid";
+import { SERVER_URL } from "../axios/custom";
 
 const ProductGrid = ({ products }: { products?: Product[] }) => {
   return (
@@ -13,12 +14,10 @@ const ProductGrid = ({ products }: { products?: Product[] }) => {
           <ProductItem
             key={nanoid()}
             id={product.id}
-            image={product.image}
-            title={product.title}
-            category={product.category}
+            image={`${SERVER_URL}/${product.img}`}
+            title={product.name}
+            category="luxury"
             price={product.price}
-            popularity={product.popularity}
-            stock={product.stock}
           />
         ))}
     </div>
