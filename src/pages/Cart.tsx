@@ -19,7 +19,7 @@ const Cart = () => {
     <div className="bg-white mx-auto max-w-screen-2xl px-5 max-[400px]:px-3">
       <div className="pb-24 pt-16">
         <h1 className="text-3xl tracking-tight text-gray-900 sm:text-4xl">
-          Shopping Cart
+          This week order
         </h1>
         <form className="mt-12 lg:grid lg:grid-cols-12 lg:items-start lg:gap-x-12 xl:gap-x-16">
           <section aria-labelledby="cart-heading" className="lg:col-span-7">
@@ -197,7 +197,7 @@ const Cart = () => {
               <div className="mt-6">
                 <Link
                   to="/checkout"
-                  className="text-white bg-secondaryBrown text-center text-xl font-normal tracking-[0.6px] leading-[72px] w-full h-12 flex items-center justify-center max-md:text-base"
+                  className="text-white bg-gray-500 text-center text-xl font-normal tracking-[0.6px] leading-[72px] w-full h-12 flex items-center justify-center max-md:text-base"
                 >
                   Checkout
                 </Link>
