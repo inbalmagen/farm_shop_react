@@ -1,34 +1,27 @@
-import {
-  Button,
-  Dropdown,
-  ProductItem,
-  QuantityInput,
-  StandardSelectInput,
-} from "../components";
+import { Button, QuantityInput } from "../components";
 import { useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-import { addProductToTheCart } from "../features/cart/cartSlice";
 import { useAppDispatch } from "../hooks";
-import WithSelectInputWrapper from "../utils/withSelectInputWrapper";
-import WithNumberInputWrapper from "../utils/withNumberInputWrapper";
-import { formatCategoryName } from "../utils/formatCategoryName";
+// import WithSelectInputWrapper from "../utils/withSelectInputWrapper";
+// import WithNumberInputWrapper from "../utils/withNumberInputWrapper";
 import toast from "react-hot-toast";
 import { getAxiosInstance } from "../common/axios-helper";
 import { SERVER_URL } from "../common/axios-helper";
+import { addToOrder } from "../common/add-to-order";
 
 const SingleProduct = () => {
-  const [products, setProducts] = useState<Product[]>([]);
+  // const [products, setProducts] = useState<Product[]>([]);
   const [singleProduct, setSingleProduct] = useState<Product | null>(null);
   // defining default values for input fields
-  const [size, setSize] = useState<string>("xs");
-  const [color, setColor] = useState<string>("black");
-  const [quantity, setQuantity] = useState<number>(1);
+  // const [size, setSize] = useState<string>("xs");
+  // const [color, setColor] = useState<string>("black");
+  // const [quantity, setQuantity] = useState<number>(1);
   const params = useParams<{ id: string }>();
   const dispatch = useAppDispatch();
 
   // defining HOC instances
-  const SelectInputUpgrade = WithSelectInputWrapper(StandardSelectInput);
-  const QuantityInputUpgrade = WithNumberInputWrapper(QuantityInput);
+  // const SelectInputUpgrade = WithSelectInputWrapper(StandardSelectInput);
+  // const QuantityInputUpgrade = WithNumberInputWrapper(QuantityInput);
 
   useEffect(() => {
     const fetchSingleProduct = async () => {
@@ -39,33 +32,29 @@ const SingleProduct = () => {
       setSingleProduct(data);
     };
 
-    const fetchProducts = async () => {
-      const response = await fetch("http://localhost:3000/products");
-      const data = await response.json();
-      setProducts(data);
-    };
     fetchSingleProduct();
-    fetchProducts();
   }, [params.id]);
 
   const handleAddToCart = () => {
-    if (singleProduct) {
-      dispatch(
-        addProductToTheCart({
-          id: singleProduct.id + size + color,
-          image: singleProduct.image,
-          title: singleProduct.title,
-          category: singleProduct.category,
-          price: singleProduct.price,
-          quantity,
-          size,
-          color,
-          popularity: singleProduct.popularity,
-          stock: singleProduct.stock,
-        })
-      );
-      toast.success("Product added to the cart");
-    }
+    addToOrder(Number(singleProduct?.id ?? 0), singleProduct?.price ?? 0);
+    toast.success("Product added to the cart");
+
+    // if (singleProduct) {
+    //   dispatch();
+    //   // addProductToTheCart({
+    //   //   id: singleProduct.id + size + color,
+    //   //   img: `${SERVER_URL}/${singleProduct.img}`,
+    //   //   title: singleProduct.name,
+    //   //   category: singleProduct.category,
+    //   //   price: singleProduct.price,
+    //   //   quantity,
+    //   //   // size,
+    //   //   // color,
+    //   //   popularity: singleProduct.popularity,
+    //   //   stock: singleProduct.stock,
+    //   // })
+    //   toast.success("Product added to the cart");
+    // }
   };
 
   return (
@@ -120,12 +109,12 @@ const SingleProduct = () => {
               }
             /> */}
 
-            <QuantityInputUpgrade
+            {/* <QuantityInputUpgrade
               value={quantity}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 setQuantity(() => parseInt(e.target.value))
               }
-            />
+            /> */}
           </div>
           <div className="flex flex-col gap-3">
             <Button mode="brown" text="Add to cart" onClick={handleAddToCart} />
