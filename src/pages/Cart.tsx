@@ -3,17 +3,41 @@ import {
   HiXMark as XMarkIcon,
   HiQuestionMarkCircle as QuestionMarkCircleIcon,
 } from "react-icons/hi2";
-import { useAppDispatch, useAppSelector } from "../hooks";
+// import { useAppDispatch, useAppSelector } from "../hooks";
 import { Link } from "react-router-dom";
+import { useAppSelector, useAppDispatch } from "../hooks";
 import {
   removeProductFromTheCart,
   updateProductQuantity,
 } from "../features/cart/cartSlice";
 import toast from "react-hot-toast";
+import { useEffect, useState } from "react";
+import { getAxiosInstance, SERVER_URL } from "../common/axios-helper";
+import { addToOrder } from "../common/add-to-order";
 
 const Cart = () => {
-  const { productsInCart, subtotal } = useAppSelector((state) => state.cart);
   const dispatch = useAppDispatch();
+  // const { productsInCart, subtotal } = useAppSelector((state) => state.cart);
+
+  const [productsInCart, setProductsInCart] = useState<Product[]>([]);
+  const [subtotal, setSubtotal] = useState<number>(0);
+  const fetchOpenOrders = async () => {
+    try {
+      const axiosInstance = getAxiosInstance();
+      const response = await axiosInstance.get("/orders/open/");
+      console.log(response.data);
+      setProductsInCart(response.data.id ? response.data.order_products : []);
+      setSubtotal(response.data.total_price ?? 0);
+    } catch (error) {
+      console.error("Error fetching open orders:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchOpenOrders();
+  }, []);
+  // const { productsInCart, subtotal } = useAppSelector((state) => state.cart);
+  // const dispatch = useAppDispatch();
 
   return (
     <div className="bg-white mx-auto max-w-screen-2xl px-5 max-[400px]:px-3">
@@ -35,7 +59,7 @@ const Cart = () => {
                 <li key={product.id} className="flex py-6 sm:py-10">
                   <div className="flex-shrink-0">
                     <img
-                      src={`/src/assets/${product.img}`}
+                      src={`${SERVER_URL}/${product?.product?.img}`}
                       alt={product.name}
                       className="h-24 w-24 object-cover object-center sm:h-48 sm:w-48"
                     />
@@ -73,14 +97,21 @@ const Cart = () => {
                           type="number"
                           id="quantity"
                           className="w-16 h-7 indent-1 bg-white border"
-                          value={product?.quantity}
-                          onChange={(e) => {
-                            dispatch(
-                              updateProductQuantity({
-                                id: product?.id,
-                                quantity: parseInt(e.target.value),
-                              })
+                          value={product?.amount}
+                          onChange={async (e) => {
+                            console.log(e.target.value);
+                            console.log("product", product);
+                            await addToOrder(
+                              Number(product?.product?.id),
+                              product?.price
                             );
+                            await fetchOpenOrders();
+                            // dispatch(
+                            //   updateProductQuantity({
+                            //     id: product?.id,
+                            //     quantity: parseInt(e.target.value),
+                            //   })
+                            // );
                           }}
                         />
 
@@ -144,7 +175,7 @@ const Cart = () => {
                   ${subtotal}
                 </dd>
               </div>
-              <div className="flex items-center justify-between border-t border-gray-200 pt-4">
+              {/* <div className="flex items-center justify-between border-t border-gray-200 pt-4">
                 <dt className="flex items-center text-sm text-gray-600">
                   <span>Shipping estimate</span>
                   <a
@@ -163,8 +194,8 @@ const Cart = () => {
                 <dd className="text-sm font-medium text-gray-900">
                   ${subtotal === 0 ? 0 : 5.0}
                 </dd>
-              </div>
-              <div className="flex items-center justify-between border-t border-gray-200 pt-4">
+              </div> */}
+              {/* <div className="flex items-center justify-between border-t border-gray-200 pt-4">
                 <dt className="flex text-sm text-gray-600">
                   <span>Tax estimate</span>
                   <a
@@ -183,15 +214,15 @@ const Cart = () => {
                 <dd className="text-sm font-medium text-gray-900">
                   ${subtotal / 5}
                 </dd>
-              </div>
-              <div className="flex items-center justify-between border-t border-gray-200 pt-4">
+              </div> */}
+              {/* <div className="flex items-center justify-between border-t border-gray-200 pt-4">
                 <dt className="text-base font-medium text-gray-900">
                   Order total
                 </dt>
                 <dd className="text-base font-medium text-gray-900">
                   ${subtotal === 0 ? 0 : subtotal + subtotal / 5 + 5}
                 </dd>
-              </div>
+              </div> */}
             </dl>
 
             {productsInCart.length > 0 && (
