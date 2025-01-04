@@ -82,15 +82,16 @@ const SingleProduct = () => {
         <div className="w-full flex flex-col gap-5 mt-9">
           <div className="flex flex-col gap-2">
             <h1 className="text-4xl">{singleProduct?.name}</h1>
+            
             <div className="flex justify-between items-center">
               <p className="text-base text-secondaryBrown">
-                {formatCategoryName(singleProduct?.description || "")}
+                {/* {formatCategoryName(singleProduct?.description || "")} */}
               </p>
               <p className="text-base font-bold">₪{ singleProduct?.price }</p>
             </div>
           </div>
           <div className="flex flex-col gap-2">
-            <SelectInputUpgrade
+            {/* <SelectInputUpgrade
               selectList={[
                 { id: "xs", value: "XS" },
                 { id: "sm", value: "SM" },
@@ -103,8 +104,8 @@ const SingleProduct = () => {
               onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
                 setSize(() => e.target.value)
               }
-            />
-            <SelectInputUpgrade
+            /> */}
+            {/* <SelectInputUpgrade
               selectList={[
                 { id: "black", value: "BLACK" },
                 { id: "red", value: "RED" },
@@ -117,7 +118,7 @@ const SingleProduct = () => {
               onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
                 setColor(() => e.target.value)
               }
-            />
+            /> */}
 
             <QuantityInputUpgrade
               value={quantity}
@@ -129,31 +130,14 @@ const SingleProduct = () => {
           <div className="flex flex-col gap-3">
             <Button mode="brown" text="Add to cart" onClick={handleAddToCart} />
             <p className="text-secondaryBrown text-sm text-right">
-              Delivery estimated on the Friday, July 26
+              Delivery estimated one day from closing the order.
             </p>
           </div>
           <div>
-            {/* drowdown items */}
-            <Dropdown dropdownTitle="Description">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Labore
-              quos deleniti, mollitia, vitae harum suscipit voluptatem quasi, ab
-              assumenda accusantium rem praesentium accusamus quae quam tempore
-              nostrum corporis eaque. Mollitia.
-            </Dropdown>
-
-            <Dropdown dropdownTitle="Product Details">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga ad
-              at odio illo, necessitatibus, reprehenderit dolore voluptas ea
-              consequuntur ducimus repellat soluta mollitia facere sapiente.
-              Unde provident possimus hic dolore.
-            </Dropdown>
-
-            <Dropdown dropdownTitle="Delivery Details">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga ad
-              at odio illo, necessitatibus, reprehenderit dolore voluptas ea
-              consequuntur ducimus repellat soluta mollitia facere sapiente.
-              Unde provident possimus hic dolore.
-            </Dropdown>
+          <section>
+            <h2>Description</h2>
+            <p>{singleProduct?.description}</p>
+          </section>
           </div>
         </div>
       </div>
