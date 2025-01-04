@@ -13,6 +13,8 @@ import WithSelectInputWrapper from "../utils/withSelectInputWrapper";
 import WithNumberInputWrapper from "../utils/withNumberInputWrapper";
 import { formatCategoryName } from "../utils/formatCategoryName";
 import toast from "react-hot-toast";
+import { getAxiosInstance } from "../axios/custom";
+import { SERVER_URL } from "../axios/custom";
 
 const SingleProduct = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -30,10 +32,10 @@ const SingleProduct = () => {
 
   useEffect(() => {
     const fetchSingleProduct = async () => {
-      const response = await fetch(
-        `http://localhost:3000/products/${params.id}`
-      );
-      const data = await response.json();
+      const response = await getAxiosInstance()(`/products/${params.id}`);
+      const data = await response.data;
+      console.log(data);
+      
       setSingleProduct(data);
     };
 
@@ -71,18 +73,20 @@ const SingleProduct = () => {
       <div className="grid grid-cols-3 gap-x-8 max-lg:grid-cols-1">
         <div className="lg:col-span-2">
           <img
-            src={`/src/assets/${singleProduct?.image}`}
-            alt={singleProduct?.title}
+            // src={`/src/assets/${singleProduct?.img}`}
+            src={`${SERVER_URL}/${singleProduct?.img}`}
+            alt={singleProduct?.name}
+            className="full-size-image"
           />
         </div>
         <div className="w-full flex flex-col gap-5 mt-9">
           <div className="flex flex-col gap-2">
-            <h1 className="text-4xl">{singleProduct?.title}</h1>
+            <h1 className="text-4xl">{singleProduct?.name}</h1>
             <div className="flex justify-between items-center">
               <p className="text-base text-secondaryBrown">
-                {formatCategoryName(singleProduct?.category || "")}
+                {formatCategoryName(singleProduct?.description || "")}
               </p>
-              <p className="text-base font-bold">${ singleProduct?.price }</p>
+              <p className="text-base font-bold">₪{ singleProduct?.price }</p>
             </div>
           </div>
           <div className="flex flex-col gap-2">
