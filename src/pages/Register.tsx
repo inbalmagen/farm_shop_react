@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "../components";
 import { checkRegisterFormData } from "../utils/checkRegisterFormData";
-import { getAxiosInstance } from "../axios/custom";
+import { getAxiosInstance } from "../common/axios-helper";
 import toast from "react-hot-toast";
 
 const Register = () => {

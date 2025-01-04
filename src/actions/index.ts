@@ -1,5 +1,5 @@
 import { redirect } from "react-router-dom";
-import { getAxiosInstance } from "../axios/custom";
+import { getAxiosInstance } from "../common/axios-helper";
 
 interface SearchActionRequest {
   request: {

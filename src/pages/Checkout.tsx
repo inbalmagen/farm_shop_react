@@ -2,7 +2,7 @@ import { HiTrash as TrashIcon } from "react-icons/hi2";
 import { Button } from "../components";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import { removeProductFromTheCart } from "../features/cart/cartSlice";
-import { getAxiosInstance } from "../axios/custom";
+import { getAxiosInstance } from "../common/axios-helper";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { checkCheckoutFormData } from "../utils/checkCheckoutFormData";

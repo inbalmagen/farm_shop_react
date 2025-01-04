@@ -1,7 +1,7 @@
 import React from "react";
 import ProductItem from "./ProductItem";
 import { nanoid } from "nanoid";
-import { SERVER_URL } from "../axios/custom";
+import { SERVER_URL } from "../common/axios-helper";
 
 const ProductGrid = ({ products }: { products?: Product[] }) => {
   return (

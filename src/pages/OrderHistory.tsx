@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { Link, useLoaderData, useNavigate } from "react-router-dom";
-import { getAxiosInstance } from "../axios/custom";
+import { getAxiosInstance } from "../common/axios-helper";
 import { formatDate } from "../utils/formatDate";
 
 export const loader = async () => {

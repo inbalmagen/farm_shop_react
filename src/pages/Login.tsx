@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "../components";
 import { checkLoginFormData } from "../utils/checkLoginFormData";
-import { getAxiosInstance } from "../axios/custom";
+import { getAxiosInstance } from "../common/axios-helper";
 import toast from "react-hot-toast";
 import { useEffect } from "react";
 import { setLoginStatus } from "../features/auth/authSlice";

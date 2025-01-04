@@ -5,7 +5,7 @@ import {
   useLoaderData,
   useNavigate,
 } from "react-router-dom";
-import { getAxiosInstance } from "../axios/custom";
+import { getAxiosInstance } from "../common/axios-helper";
 import { nanoid } from "nanoid";
 import { formatDate } from "../utils/formatDate";
 

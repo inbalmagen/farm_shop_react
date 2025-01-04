@@ -13,8 +13,8 @@ import WithSelectInputWrapper from "../utils/withSelectInputWrapper";
 import WithNumberInputWrapper from "../utils/withNumberInputWrapper";
 import { formatCategoryName } from "../utils/formatCategoryName";
 import toast from "react-hot-toast";
-import { getAxiosInstance } from "../axios/custom";
-import { SERVER_URL } from "../axios/custom";
+import { getAxiosInstance } from "../common/axios-helper";
+import { SERVER_URL } from "../common/axios-helper";
 
 const SingleProduct = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -35,7 +35,7 @@ const SingleProduct = () => {
       const response = await getAxiosInstance()(`/products/${params.id}`);
       const data = await response.data;
       console.log(data);
-      
+
       setSingleProduct(data);
     };
 
@@ -82,12 +82,12 @@ const SingleProduct = () => {
         <div className="w-full flex flex-col gap-5 mt-9">
           <div className="flex flex-col gap-2">
             <h1 className="text-4xl">{singleProduct?.name}</h1>
-            
+
             <div className="flex justify-between items-center">
               <p className="text-base text-secondaryBrown">
                 {/* {formatCategoryName(singleProduct?.description || "")} */}
               </p>
-              <p className="text-base font-bold">₪{ singleProduct?.price }</p>
+              <p className="text-base font-bold">₪{singleProduct?.price}</p>
             </div>
           </div>
           <div className="flex flex-col gap-2">
@@ -134,14 +134,13 @@ const SingleProduct = () => {
             </p>
           </div>
           <div>
-          <section>
-            <h2>Description</h2>
-            <p>{singleProduct?.description}</p>
-          </section>
+            <section>
+              <h2>Description</h2>
+              <p>{singleProduct?.description}</p>
+            </section>
           </div>
         </div>
       </div>
-
     </div>
   );
 };
