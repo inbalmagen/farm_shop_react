@@ -89,7 +89,7 @@ const Login = () => {
         </h2>
         <div className="flex flex-col gap-2 w-full">
           <div className="flex flex-col gap-1">
-            <label htmlFor="name">Your email</label>
+            <label htmlFor="name">Your name</label>
             <input
               type="string"
               className="bg-white border border-black text-xl py-2 px-3 w-full outline-none max-[450px]:text-base"
@@ -98,7 +98,7 @@ const Login = () => {
             />
           </div>
           <div className="flex flex-col gap-1">
-            <label htmlFor="name">Your password</label>
+            <label htmlFor="name">Your Employee Number</label>
             <input
               type="password"
               className="bg-white border border-black text-xl py-2 px-3 w-full outline-none max-[450px]:text-base"
