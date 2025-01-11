@@ -16,9 +16,9 @@ async function addToOrder(productId: number, productPrice: number) {
       }
     });
     let orderId;
-    console.log("open order response: ", response.data);
-    console.log("length: ", response.data.length);
-    if (response.data.id) {
+    console.log("open order response: ", response?.data);
+    console.log("length: ", response?.data.length);
+    if (response?.data.id) {
       orderId = response.data.id;
     } else {
       const createResponse = await axiosInstance.post(`/orders/create/`, {
