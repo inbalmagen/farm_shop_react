@@ -9,7 +9,7 @@ import {
 const ProductGridWrapper = ({
   searchQuery,
   sortCriteria,
-  category,
+  // category,
   page,
   limit,
   children,

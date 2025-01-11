@@ -3,7 +3,7 @@ import toast from "react-hot-toast";
 import {
   LoaderFunctionArgs,
   useLoaderData,
-  useNavigate,
+  // useNavigate,
 } from "react-router-dom";
 import { getAxiosInstance } from "../common/axios-helper";
 import { nanoid } from "nanoid";
@@ -12,20 +12,21 @@ import { formatDate } from "../utils/formatDate";
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   const { id } = params;
   const response = await getAxiosInstance()(`orders/${id}`);
+  console.log(response.data || []);
   return response.data;
 };
 
 const SingleOrderHistory = () => {
-  const [user] = useState(JSON.parse(localStorage.getItem("user") || "{}"));
-  const navigate = useNavigate();
-  const singleOrder = useLoaderData() as Order;
+  // const [user] = useState(JSON.parse(localStorage.getItem("user") || "{}"));
+  // const navigate = useNavigate();
+  const singleOrder = useLoaderData() as OrderSingle;
 
-  useEffect(() => {
-    if (!user?.id) {
-      toast.error("Please login to view this page");
-      navigate("/login");
-    }
-  }, [user, navigate]);
+  // useEffect(() => {
+  //   if (!user?.id) {
+  //     toast.error("Please login to view this page");
+  //     navigate("/login");
+  //   }
+  // }, [user, navigate]);
 
   return (
     <div className="max-w-screen-2xl mx-auto pt-20 px-5">
@@ -34,15 +35,14 @@ const SingleOrderHistory = () => {
         <h2 className="text-2xl font-semibold mb-4">
           Order ID: {singleOrder.id}
         </h2>
-        <p className="mb-2">Date: {formatDate(singleOrder.orderDate)}</p>
-        <p className="mb-2">Subtotal: ${singleOrder.subtotal}</p>
-        <p className="mb-2">Shipping: $5</p>
-        <p className="mb-2">Tax: ${singleOrder.subtotal / 5}</p>
+        <p className="mb-2">Date: {'none'}</p>
+        <p className="mb-2">Subtotal: ${singleOrder.total_price}</p>
+       
         <p className="mb-2">
           Total: $
-          {(singleOrder.subtotal + 5 + singleOrder.subtotal / 5).toFixed(2)}
+          {singleOrder.total_price}
         </p>
-        <p className="mb-2">Status: {singleOrder.orderStatus}</p>
+        <p className="mb-2">Status: {'singleOrder.orderStatus'}</p>
         <h3 className="text-xl font-semibold mt-6 mb-4">Items</h3>
         <table className="singleOrder-table min-w-full bg-white border border-gray-200">
           <thead>
@@ -53,14 +53,14 @@ const SingleOrderHistory = () => {
             </tr>
           </thead>
           <tbody>
-            {singleOrder.products.map((product) => (
+            {singleOrder.order_products.map((product) => (
               <tr key={nanoid()}>
-                <td className="py-3 px-4 border-b">{product?.name}</td>
+                <td className="py-3 px-4 border-b">{product?.product.name}</td>
                 <td className="py-3 px-4 border-b text-center">
-                  {product?.quantity}
+                  {product?.amount}
                 </td>
                 <td className="py-3 px-4 border-b text-right">
-                  ${product?.price.toFixed(2)}
+                  ${product?.price}
                 </td>
               </tr>
             ))}

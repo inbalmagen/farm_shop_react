@@ -13,10 +13,10 @@ interface Product {
 
 interface ProductInCart extends Product {
   id: string;
-  quantity: number;
-  size: string;
-  color: string;
-  stock: number;
+  amount: number;
+  price: string;
+  total_price: string;
+  product: {name: string, img: string};
 }
 
 interface User {
@@ -28,17 +28,23 @@ interface User {
   password: string;
 }
 
+interface OrderSingle {
+  id: string;
+  name: string;
+  amount: number;
+  price: number;
+  total_price: number;
+  order_products: ProductInCart[];
+}
+
 interface Order {
   id: number;
-  orderStatus: string;
-  orderDate: string;
-  data: {
-    email: string;
-  };
-  products: ProductInCart[];
-  subtotal: number;
-  user: {
-    email: string;
-    id: number;
-  };
+  status: string;
+  // orderDate: string;
+  // data: {
+  //   email: string;
+  // };
+  // order_products: ProductInCart[];
+  total_price: number;
+  user: number;
 }

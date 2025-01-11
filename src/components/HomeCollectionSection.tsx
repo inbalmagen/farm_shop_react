@@ -9,7 +9,7 @@ const HomeCollectionSection = () => {
           Our Collection
         </h2>
       </div>
-      <ProductGridWrapper limit={6}>
+      <ProductGridWrapper limit={20}>
         <ProductGrid />
       </ProductGridWrapper>
     </div>

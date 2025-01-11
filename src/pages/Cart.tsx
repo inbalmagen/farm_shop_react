@@ -1,14 +1,14 @@
 import {
   HiCheck as CheckIcon,
   HiXMark as XMarkIcon,
-  HiQuestionMarkCircle as QuestionMarkCircleIcon,
+  // HiQuestionMarkCircle as QuestionMarkCircleIcon,
 } from "react-icons/hi2";
 // import { useAppDispatch, useAppSelector } from "../hooks";
 import { Link } from "react-router-dom";
-import { useAppSelector, useAppDispatch } from "../hooks";
+// import { useAppSelector, useAppDispatch } from "../hooks";
 import {
   removeProductFromTheCart,
-  updateProductQuantity,
+  // updateProductQuantity,
 } from "../features/cart/cartSlice";
 import toast from "react-hot-toast";
 import { useEffect, useState } from "react";
@@ -16,10 +16,10 @@ import { getAxiosInstance, SERVER_URL } from "../common/axios-helper";
 import { addToOrder } from "../common/add-to-order";
 
 const Cart = () => {
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
   // const { productsInCart, subtotal } = useAppSelector((state) => state.cart);
 
-  const [productsInCart, setProductsInCart] = useState<Product[]>([]);
+  const [productsInCart, setProductsInCart] = useState<ProductInCart[]>([]);
   const [subtotal, setSubtotal] = useState<number>(0);
   const fetchOpenOrders = async () => {
     try {
@@ -78,14 +78,14 @@ const Cart = () => {
                             </Link>
                           </h3>
                         </div>
-                        <div className="mt-1 flex text-sm">
+                        {/* <div className="mt-1 flex text-sm">
                           <p className="text-gray-500">{product.color}</p>
                           {product.size ? (
                             <p className="ml-4 border-l border-gray-200 pl-4 text-gray-500">
                               {product.size}
                             </p>
                           ) : null}
-                        </div>
+                        </div> */}
                         <p className="mt-1 text-sm font-medium text-gray-900">
                           ${product.price}
                         </p>
