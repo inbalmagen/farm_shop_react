@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import { getAxiosInstance } from "../common/axios-helper";
-// import { formatDate } from "../utils/formatDate";
+import { formatDate } from "../utils/formatDate";
 
 export const loader = async () => {
   try {
@@ -35,7 +35,8 @@ const OrderHistory = () => {
           <thead>
             <tr>
               <th className="py-3 px-4 border-b">Order ID</th>
-              <th className="py-3 px-4 border-b">Date</th>
+              <th className="py-3 px-4 border-b">Create Date</th>
+              <th className="py-3 px-4 border-b">Close Date</th>
               <th className="py-3 px-4 border-b">Total</th>
               <th className="py-3 px-4 border-b">Status</th>
               <th className="py-3 px-4 border-b">Actions</th>
@@ -45,7 +46,12 @@ const OrderHistory = () => {
             {orders.map((order) => (
               <tr key={order.id}>
                 <td className="py-3 px-4 border-b text-center">{order.id}</td>
-                <td className="py-3 px-4 border-b text-center">{"none"}</td>
+                <td className="py-3 px-4 border-b text-center">
+                  {formatDate(order.create_date)}
+                </td>
+                <td className="py-3 px-4 border-b text-center">
+                  {order.close_date ? formatDate(order.close_date ?? "") : "N/A"}
+                </td>
                 <td className="py-3 px-4 border-b text-center">
                   ${order.total_price}
                 </td>

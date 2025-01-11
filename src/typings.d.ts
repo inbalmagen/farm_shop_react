@@ -32,6 +32,8 @@ interface OrderSingle {
   id: string;
   name: string;
   amount: number;
+  create_date: string;
+  close_date?: string;
   price: number;
   total_price: number;
   order_products: ProductInCart[];
@@ -40,6 +42,8 @@ interface OrderSingle {
 interface Order {
   id: number;
   status: string;
+  create_date: string;
+  close_date?: string;
   // orderDate: string;
   // data: {
   //   email: string;
@@ -48,3 +52,4 @@ interface Order {
   total_price: number;
   user: number;
 }
+

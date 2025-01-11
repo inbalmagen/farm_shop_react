@@ -34,8 +34,12 @@ const ProductGridWrapper = ({
       if (!query || query.length === 0) {
         query = "";
       }
-      const response = await getAxiosInstance()("/products/");
-      const allProducts = await response.data;
+      const response = await getAxiosInstance()("/products/").catch((error) => {
+        if (error.response && error.response.status === 401) {
+          window.location.href = "/login";
+        }
+      });
+      const allProducts = await response?.data;
       let searchedProducts = allProducts;
       console.log(allProducts);
       // let searchedProducts = allProducts.filter((product: Product) =>
