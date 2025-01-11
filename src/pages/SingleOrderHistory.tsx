@@ -11,9 +11,13 @@ import { formatDate } from "../utils/formatDate";
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   const { id } = params;
-  const response = await getAxiosInstance()(`orders/${id}`);
-  console.log(response.data || []);
-  return response.data;
+  const response = await getAxiosInstance()(`orders/${id}`).catch((error) => {
+    if (error.response && error.response.status === 401) {
+      window.location.href = "/login";
+    }
+  });
+  console.log(response?.data || []);
+  return response?.data;
 };
 
 const SingleOrderHistory = () => {

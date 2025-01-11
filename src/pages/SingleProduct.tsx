@@ -25,8 +25,12 @@ const SingleProduct = () => {
 
   useEffect(() => {
     const fetchSingleProduct = async () => {
-      const response = await getAxiosInstance()(`/products/${params.id}`);
-      const data = await response.data;
+      const response = await getAxiosInstance()(`/products/${params.id}`).catch((error) => {
+        if (error.response && error.response.status === 401) {
+          window.location.href = "/login";
+        }
+      });
+      const data = await response?.data;
       console.log(data);
 
       setSingleProduct(data);

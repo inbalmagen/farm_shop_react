@@ -6,10 +6,10 @@ import {
 // import { useAppDispatch, useAppSelector } from "../hooks";
 import { Link } from "react-router-dom";
 // import { useAppSelector, useAppDispatch } from "../hooks";
-import {
-  removeProductFromTheCart,
-  // updateProductQuantity,
-} from "../features/cart/cartSlice";
+// import {
+//   removeProductFromTheCart,
+//   // updateProductQuantity,
+// } from "../features/cart/cartSlice";
 import toast from "react-hot-toast";
 import { useEffect, useState } from "react";
 import { getAxiosInstance, SERVER_URL } from "../common/axios-helper";
@@ -24,10 +24,14 @@ const Cart = () => {
   const fetchOpenOrders = async () => {
     try {
       const axiosInstance = getAxiosInstance();
-      const response = await axiosInstance.get("/orders/open/");
-      console.log(response.data);
-      setProductsInCart(response.data.id ? response.data.order_products : []);
-      setSubtotal(response.data.total_price ?? 0);
+      const response = await axiosInstance.get("/orders/open/").catch((error) => {
+        if (error.response && error.response.status === 401) {
+          window.location.href = "/login";
+        }
+      });
+      console.log(response?.data);
+      setProductsInCart(response?.data.id ? response?.data.order_products : []);
+      setSubtotal(response?.data.total_price ?? 0);
     } catch (error) {
       console.error("Error fetching open orders:", error);
     }
@@ -36,12 +40,12 @@ const Cart = () => {
   useEffect(() => {
     fetchOpenOrders();
   }, []);
-  function dispatch(arg0: {
-    payload: { id: string };
-    type: "cart/removeProductFromTheCart";
-  }) {
-    console.log(arg0);
-  }
+  // function dispatch(arg0: {
+  //   payload: { id: string };
+  //   type: "cart/removeProductFromTheCart";
+  // }) {
+  //   console.log(arg0);
+  // }
 
   // const { productsInCart, subtotal } = useAppSelector((state) => state.cart);
   // const dispatch = useAppDispatch();
@@ -126,10 +130,16 @@ const Cart = () => {
                           <button
                             type="button"
                             className="-m-2 inline-flex p-2 text-gray-400 hover:text-gray-500"
-                            onClick={() => {
-                              dispatch(
-                                removeProductFromTheCart({ id: product?.id })
-                              );
+                            onClick={async () => {
+                              // dispatch(
+                              //   removeProductFromTheCart({ id: product?.id })
+                              // );
+                              await getAxiosInstance().delete(`/orders/order-products/${product?.id}/`).catch((error) => {
+                                if (error.response && error.response.status === 401) {
+                                  window.location.href = "/login";
+                                }
+                              });
+                              await fetchOpenOrders();
                               toast.error("Product removed from the cart");
                             }}
                           >
@@ -235,10 +245,10 @@ const Cart = () => {
             {productsInCart.length > 0 && (
               <div className="mt-6">
                 <Link
-                  to="/checkout"
+                  to="/"
                   className="text-white bg-gray-500 text-center text-xl font-normal tracking-[0.6px] leading-[72px] w-full h-12 flex items-center justify-center max-md:text-base"
                 >
-                  Checkout
+                  Continue shopping
                 </Link>
               </div>
             )}

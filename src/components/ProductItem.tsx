@@ -1,5 +1,8 @@
 import { Link } from "react-router-dom";
 import { formatCategoryName } from "../utils/formatCategoryName";
+import Button from "../components/Button";
+import { addToOrder } from "../common/add-to-order";
+import toast from "react-hot-toast";
 
 const ProductItem = ({
   id,
@@ -14,6 +17,17 @@ const ProductItem = ({
   category: string;
   price: number;
 }) => {
+  function handleAddToCart(
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ): void {
+    event.preventDefault();
+    addToOrder(Number(id ?? 0), price ?? 0);
+    console.log(`Product ${id} added to cart`);
+    toast.success("Product added to the cart");
+    // Here you can add the logic to add the product to the cart
+    // For example, you might want to update the state or call a context method
+  }
+
   return (
     <div className="w-[400px] flex flex-col gap-2 justify-center max-md:w-[300px]">
       <Link
@@ -47,12 +61,16 @@ const ProductItem = ({
         >
           Learn more
         </Link> */}
-        <Link
+        {/* <Link
           to={`/product/update/${id}`}
           className="bg-white text-black text-center text-xl border border-[rgba(0, 0, 0, 0.40)] font-normal tracking-[0.6px] leading-[72px] w-full h-12 flex items-center justify-center max-md:text-base"
         >
           Update Product
-        </Link>        
+        </Link>         */}
+      </div>
+      <div className="flex flex-col gap-3">
+        <Button mode="brown" text="Add to cart" onClick={handleAddToCart} />
+        <p className="text-secondaryBrown text-sm text-right"></p>
       </div>
     </div>
   );

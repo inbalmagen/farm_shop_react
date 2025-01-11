@@ -5,9 +5,14 @@ import { formatDate } from "../utils/formatDate";
 
 export const loader = async () => {
   try {
-    const response = await getAxiosInstance().get("/orders/closed/");
-    console.log(response.data || []);
-    return response.data;
+    const response = await getAxiosInstance().get("/orders/closed/").catch((error) => {
+      if (error.response && error.response.status === 401) {
+        window.location.href = "/login";
+      }
+    });
+  
+    console.log(response?.data || []);
+    return response?.data;
   } catch (error) {
     console.error("Failed to fetch orders:", error);
     return [];

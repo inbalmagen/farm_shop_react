@@ -19,8 +19,12 @@ const UserProfile = () => {
   };
 
   const fetchUser = async (userId: number | string) => {
-    const response = await getAxiosInstance()(`/users/${userId}`);
-    setUser(response.data);
+    const response = await getAxiosInstance()(`/users/${userId}`).catch((error) => {
+      if (error.response && error.response.status === 401) {
+        window.location.href = "/login";
+      }
+    });
+    setUser(response?.data);
   };
 
   const updateUser = async (e: React.FormEvent<HTMLFormElement>) => {

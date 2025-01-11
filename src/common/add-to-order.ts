@@ -10,7 +10,11 @@ async function addToOrder(productId: number, productPrice: number) {
   const axiosInstance = getAxiosInstance();
 
   try {
-    const response = await axiosInstance.get(`/orders/open/`);
+    const response = await axiosInstance.get(`/orders/open/`).catch((error) => {
+      if (error.response && error.response.status === 401) {
+        window.location.href = "/login";
+      }
+    });
     let orderId;
     console.log("open order response: ", response.data);
     console.log("length: ", response.data.length);
