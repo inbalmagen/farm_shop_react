@@ -24,7 +24,7 @@ export const cartSlice = createSlice({
           if (product.id === action.payload.id) {
             return {
               ...product,
-              quantity: product.quantity + action.payload.quantity,
+              // quantity: product.quantity + action.payload.quantity,
             };
           }
           return product;
@@ -60,10 +60,10 @@ export const cartSlice = createSlice({
     },
     calculateTotalPrice: (state) => {
       state.subtotal = state.productsInCart.reduce(
-        (acc, product) => acc + product.price * product.quantity,
-        0
+        (acc, product) => acc + parseFloat(product.price) * product.amount,
+        0 
       );
-    },
+    },  
   },
 });
 

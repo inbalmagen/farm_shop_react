@@ -1,21 +1,21 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import {
   Cart,
-  Checkout,
+  // Checkout,
   HomeLayout,
   Landing,
   Login,
   OrderConfirmation,
   OrderHistory,
   Register,
-  Search,
+  // Search,
   Shop,
   SingleOrderHistory,
   SingleProduct,
   UserProfile,
 } from "./pages";
-import { checkoutAction, searchAction } from "./actions/index";
-import { shopCategoryLoader } from "./pages/Shop";
+// import { checkoutAction, searchAction } from "./actions/index";
+// import { shopCategoryLoader } from "./pages/Shop";
 import { loader as orderHistoryLoader } from "./pages/OrderHistory";
 import { loader as singleOrderLoader } from "./pages/SingleOrderHistory";
 
@@ -32,11 +32,11 @@ const router = createBrowserRouter([
         path: "shop",
         element: <Shop />,
       },
-      {
-        path: "shop/:category",
-        element: <Shop />,
-        loader: shopCategoryLoader,
-      },
+      // {
+      //   path: "shop/:category",
+      //   element: <Shop />,
+      //   loader: shopCategoryLoader,
+      // },
       {
         path: "product/:id",
         element: <SingleProduct />,
@@ -45,16 +45,16 @@ const router = createBrowserRouter([
         path: "cart",
         element: <Cart />,
       },
-      {
-        path: "checkout",
-        element: <Checkout />,
-        action: checkoutAction,
-      },
-      {
-        path: "search",
-        action: searchAction,
-        element: <Search />,
-      },
+      // {
+      //   path: "checkout",
+      //   element: <Checkout />,
+      //   action: checkoutAction,
+      // },
+      // {
+      //   path: "search",
+      //   action: searchAction,
+      //   element: <Search />,
+      // },
       {
         path: "login",
         element: <Login />,

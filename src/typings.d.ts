@@ -16,7 +16,7 @@ interface ProductInCart extends Product {
   amount: number;
   price: string;
   total_price: string;
-  product: {name: string, img: string};
+  product: { id: string; name: string; img: string };
 }
 
 interface User {

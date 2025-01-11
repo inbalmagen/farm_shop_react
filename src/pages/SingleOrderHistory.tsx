@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import toast from "react-hot-toast";
+// import { useEffect, useState } from "react";
+// import toast from "react-hot-toast";
 import {
   LoaderFunctionArgs,
   useLoaderData,
@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import { getAxiosInstance } from "../common/axios-helper";
 import { nanoid } from "nanoid";
-import { formatDate } from "../utils/formatDate";
+// import { formatDate } from "../utils/formatDate";
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   const { id } = params;

@@ -36,6 +36,13 @@ const Cart = () => {
   useEffect(() => {
     fetchOpenOrders();
   }, []);
+  function dispatch(arg0: {
+    payload: { id: string };
+    type: "cart/removeProductFromTheCart";
+  }) {
+    console.log(arg0);
+  }
+
   // const { productsInCart, subtotal } = useAppSelector((state) => state.cart);
   // const dispatch = useAppDispatch();
 
@@ -102,8 +109,8 @@ const Cart = () => {
                             console.log(e.target.value);
                             console.log("product", product);
                             await addToOrder(
-                              Number(product?.product?.id),
-                              product?.price
+                              Number(product.product?.id),
+                              parseFloat(product?.price)
                             );
                             await fetchOpenOrders();
                             // dispatch(

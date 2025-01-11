@@ -1,5 +1,5 @@
 import { redirect } from "react-router-dom";
-import { getAxiosInstance } from "../common/axios-helper";
+// import { getAxiosInstance } from "../common/axios-helper";
 
 interface SearchActionRequest {
   request: {
@@ -7,11 +7,11 @@ interface SearchActionRequest {
   };
 }
 
-interface CheckoutFormAction {
-  request: {
-    formData: () => Promise<FormData>;
-  };
-}
+// interface CheckoutFormAction {
+//   request: {
+//     formData: () => Promise<FormData>;
+//   };
+// }
 
 export const searchAction = async ({ request }: SearchActionRequest) => {
   // getting form data
@@ -22,9 +22,9 @@ export const searchAction = async ({ request }: SearchActionRequest) => {
   return redirect(`/search?query=${data?.searchInput || ""}`);
 };
 
-export const checkoutAction = async ({ request }: CheckoutFormAction) => {
-  const formData = await request.formData();
-  const data = Object.fromEntries(formData);
-  const response = await getAxiosInstance().post("/orders", data);
-  return redirect("/");
-};
+// export const checkoutAction = async ({ request }: CheckoutFormAction) => {
+//   // const formData = await request.formData();
+//   // const data = Object.fromEntries(formData);
+//   // const response = await getAxiosInstance().post("/orders", data);
+//   return redirect("/");
+// };

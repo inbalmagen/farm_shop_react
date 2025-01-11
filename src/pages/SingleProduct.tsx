@@ -1,7 +1,7 @@
-import { Button, QuantityInput } from "../components";
+import { Button } from "../components";
 import { useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-import { useAppDispatch } from "../hooks";
+// import { useAppDispatch } from "../hooks";
 // import WithSelectInputWrapper from "../utils/withSelectInputWrapper";
 // import WithNumberInputWrapper from "../utils/withNumberInputWrapper";
 import toast from "react-hot-toast";
@@ -17,7 +17,7 @@ const SingleProduct = () => {
   // const [color, setColor] = useState<string>("black");
   // const [quantity, setQuantity] = useState<number>(1);
   const params = useParams<{ id: string }>();
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
 
   // defining HOC instances
   // const SelectInputUpgrade = WithSelectInputWrapper(StandardSelectInput);
