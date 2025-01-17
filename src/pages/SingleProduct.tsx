@@ -57,7 +57,7 @@ const SingleProduct = () => {
           <div className="flex flex-col gap-3">
             <Button mode="brown" text="Add to cart" onClick={handleAddToCart} />
             <p className="text-secondaryBrown text-sm text-right">
-              Delivery estimated one day from closing the order.
+              Delivery estimated one day after closing the order.
             </p>
           </div>
           <div>
