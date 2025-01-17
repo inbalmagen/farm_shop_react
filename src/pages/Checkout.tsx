@@ -7,24 +7,6 @@ import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { checkCheckoutFormData } from "../utils/checkCheckoutFormData";
 
-/*
-address: "Marka Markovic 22"
-apartment: "132"
-cardNumber: "21313"
-city: "Belgrade"
-company: "Bojan Cesnak"
-country: "United States"
-cvc: "122"
-emailAddress: "kuzma@gmail.com"
-expirationDate: "12312"
-firstName: "Aca22"
-lastName: "Kuzma"
-nameOnCard: "Aca JK"
-paymentType: "on"
-phone: "06123123132"
-postalCode: "11080"
-region: "Serbia"
-*/
 
 const paymentMethods = [
   { id: "credit-card", title: "Credit card" },
@@ -311,7 +293,6 @@ const Checkout = () => {
               </div>
             </div>
 
-            {/* Payment */}
             <div className="mt-10 border-t border-gray-200 pt-10">
               <h2 className="text-lg font-medium text-gray-900">Payment</h2>
 
@@ -428,7 +409,6 @@ const Checkout = () => {
             </div>
           </div>
 
-          {/* Order summary */}
           <div className="mt-10 lg:mt-0">
             <h2 className="text-lg font-medium text-gray-900">Order summary</h2>
 

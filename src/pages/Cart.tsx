@@ -1,23 +1,14 @@
 import {
   HiCheck as CheckIcon,
   HiXMark as XMarkIcon,
-  // HiQuestionMarkCircle as QuestionMarkCircleIcon,
 } from "react-icons/hi2";
-// import { useAppDispatch, useAppSelector } from "../hooks";
 import { Link } from "react-router-dom";
-// import { useAppSelector, useAppDispatch } from "../hooks";
-// import {
-//   removeProductFromTheCart,
-//   // updateProductQuantity,
-// } from "../features/cart/cartSlice";
 import toast from "react-hot-toast";
 import { useEffect, useState } from "react";
 import { getAxiosInstance, SERVER_URL } from "../common/axios-helper";
 import { addToOrder } from "../common/add-to-order";
 
 const Cart = () => {
-  // const dispatch = useAppDispatch();
-  // const { productsInCart, subtotal } = useAppSelector((state) => state.cart);
 
   const [productsInCart, setProductsInCart] = useState<ProductInCart[]>([]);
   const [subtotal, setSubtotal] = useState<number>(0);
@@ -40,15 +31,6 @@ const Cart = () => {
   useEffect(() => {
     fetchOpenOrders();
   }, []);
-  // function dispatch(arg0: {
-  //   payload: { id: string };
-  //   type: "cart/removeProductFromTheCart";
-  // }) {
-  //   console.log(arg0);
-  // }
-
-  // const { productsInCart, subtotal } = useAppSelector((state) => state.cart);
-  // const dispatch = useAppDispatch();
 
   return (
     <div className="bg-white mx-auto max-w-screen-2xl px-5 max-[400px]:px-3">
@@ -89,14 +71,6 @@ const Cart = () => {
                             </Link>
                           </h3>
                         </div>
-                        {/* <div className="mt-1 flex text-sm">
-                          <p className="text-gray-500">{product.color}</p>
-                          {product.size ? (
-                            <p className="ml-4 border-l border-gray-200 pl-4 text-gray-500">
-                              {product.size}
-                            </p>
-                          ) : null}
-                        </div> */}
                         <p className="mt-1 text-sm font-medium text-gray-900">
                           ${product.price}
                         </p>
@@ -117,12 +91,6 @@ const Cart = () => {
                               parseFloat(product?.price)
                             );
                             await fetchOpenOrders();
-                            // dispatch(
-                            //   updateProductQuantity({
-                            //     id: product?.id,
-                            //     quantity: parseInt(e.target.value),
-                            //   })
-                            // );
                           }}
                         />
 
@@ -131,9 +99,6 @@ const Cart = () => {
                             type="button"
                             className="-m-2 inline-flex p-2 text-gray-400 hover:text-gray-500"
                             onClick={async () => {
-                              // dispatch(
-                              //   removeProductFromTheCart({ id: product?.id })
-                              // );
                               await getAxiosInstance().delete(`/orders/order-products/${product?.id}/`).catch((error) => {
                                 if (error.response && error.response.status === 401) {
                                   window.location.href = "/login";
@@ -173,7 +138,6 @@ const Cart = () => {
             </ul>
           </section>
 
-          {/* Order summary */}
           <section
             aria-labelledby="summary-heading"
             className="mt-16 bg-gray-50 px-4 py-6 sm:p-6 lg:col-span-5 lg:mt-0 lg:p-8"
@@ -192,54 +156,6 @@ const Cart = () => {
                   ${subtotal}
                 </dd>
               </div>
-              {/* <div className="flex items-center justify-between border-t border-gray-200 pt-4">
-                <dt className="flex items-center text-sm text-gray-600">
-                  <span>Shipping estimate</span>
-                  <a
-                    href="#"
-                    className="ml-2 flex-shrink-0 text-gray-400 hover:text-gray-500"
-                  >
-                    <span className="sr-only">
-                      Learn more about how shipping is calculated
-                    </span>
-                    <QuestionMarkCircleIcon
-                      className="h-5 w-5 text-secondaryBrown"
-                      aria-hidden="true"
-                    />
-                  </a>
-                </dt>
-                <dd className="text-sm font-medium text-gray-900">
-                  ${subtotal === 0 ? 0 : 5.0}
-                </dd>
-              </div> */}
-              {/* <div className="flex items-center justify-between border-t border-gray-200 pt-4">
-                <dt className="flex text-sm text-gray-600">
-                  <span>Tax estimate</span>
-                  <a
-                    href="#"
-                    className="ml-2 flex-shrink-0 text-gray-400 hover:text-gray-500"
-                  >
-                    <span className="sr-only">
-                      Learn more about how tax is calculated
-                    </span>
-                    <QuestionMarkCircleIcon
-                      className="h-5 w-5 text-secondaryBrown"
-                      aria-hidden="true"
-                    />
-                  </a>
-                </dt>
-                <dd className="text-sm font-medium text-gray-900">
-                  ${subtotal / 5}
-                </dd>
-              </div> */}
-              {/* <div className="flex items-center justify-between border-t border-gray-200 pt-4">
-                <dt className="text-base font-medium text-gray-900">
-                  Order total
-                </dt>
-                <dd className="text-base font-medium text-gray-900">
-                  ${subtotal === 0 ? 0 : subtotal + subtotal / 5 + 5}
-                </dd>
-              </div> */}
             </dl>
 
             {productsInCart.length > 0 && (

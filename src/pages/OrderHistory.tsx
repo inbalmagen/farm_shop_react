@@ -26,10 +26,6 @@ const OrderHistory = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // if (!user?.id) {
-    //   toast.error("Please login to view this page");
-    //   navigate("/login");
-    // }
   }, [user, navigate]);
 
   return (

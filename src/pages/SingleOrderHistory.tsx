@@ -1,9 +1,7 @@
-// import { useEffect, useState } from "react";
-// import toast from "react-hot-toast";
 import {
   LoaderFunctionArgs,
   useLoaderData,
-  // useNavigate,
+
 } from "react-router-dom";
 import { getAxiosInstance } from "../common/axios-helper";
 import { nanoid } from "nanoid";
@@ -21,16 +19,7 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
 };
 
 const SingleOrderHistory = () => {
-  // const [user] = useState(JSON.parse(localStorage.getItem("user") || "{}"));
-  // const navigate = useNavigate();
   const singleOrder = useLoaderData() as OrderSingle;
-
-  // useEffect(() => {
-  //   if (!user?.id) {
-  //     toast.error("Please login to view this page");
-  //     navigate("/login");
-  //   }
-  // }, [user, navigate]);
 
   return (
     <div className="max-w-screen-2xl mx-auto pt-20 px-5">

@@ -23,5 +23,4 @@ const ProductGrid = ({ products }: { products?: Product[] }) => {
     </div>
   );
 };
-// Memoize the component to prevent unnecessary re-renders because of React.cloneElement
 export default React.memo(ProductGrid);

@@ -42,15 +42,6 @@ const ProductGridWrapper = ({
       const allProducts = await response?.data;
       let searchedProducts = allProducts;
       console.log(allProducts);
-      // let searchedProducts = allProducts.filter((product: Product) =>
-      //   product.name.toLowerCase().includes(query.toLowerCase())
-      // );
-
-      // if (category) {
-      //   searchedProducts = searchedProducts.filter((product: Product) => {
-      //     return product.category === category;
-      //   });
-      // }
 
       if (totalProducts !== searchedProducts.length) {
         dispatch(setTotalProducts(searchedProducts.length));

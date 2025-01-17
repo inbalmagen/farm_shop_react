@@ -55,18 +55,6 @@ const ProductItem = ({
         >
           View product
         </Link>
-        {/* <Link
-          to={`/product/${id}`}
-          className="bg-white text-black text-center text-xl border border-[rgba(0, 0, 0, 0.40)] font-normal tracking-[0.6px] leading-[72px] w-full h-12 flex items-center justify-center max-md:text-base"
-        >
-          Learn more
-        </Link> */}
-        {/* <Link
-          to={`/product/update/${id}`}
-          className="bg-white text-black text-center text-xl border border-[rgba(0, 0, 0, 0.40)] font-normal tracking-[0.6px] leading-[72px] w-full h-12 flex items-center justify-center max-md:text-base"
-        >
-          Update Product
-        </Link>         */}
       </div>
       <div className="flex flex-col gap-3">
         <Button mode="brown" text="Add to cart" onClick={handleAddToCart} />
