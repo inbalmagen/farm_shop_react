@@ -4,8 +4,8 @@ import { checkLoginFormData } from "../utils/checkLoginFormData";
 import { getAxiosInstance } from "../common/axios-helper";
 import toast from "react-hot-toast";
 import { useEffect } from "react";
-import { setLoginStatus } from "../features/auth/authSlice";
-import { store } from "../store";
+// import { setLoginStatus } from "../features/auth/authSlice";
+
 
 const Login = () => {
   const navigate = useNavigate();
@@ -30,13 +30,14 @@ const Login = () => {
       const isStaff = loginResponse.data.is_staff;
       localStorage.setItem("access_token", token);
       localStorage.setItem("user_role", isStaff ? "manager" : "customer");
-      store.dispatch(setLoginStatus(true));
+      // store.dispatch(setLoginStatus(true));
 
       // Redirect based on role
       toast.success("You logged in successfully");
       if (isStaff) {
         navigate("/shop");
         // window.location.href = "admin_products.html";
+
       } else {
         navigate("/shop");
         // window.location.href = "customer_products.html";

@@ -5,18 +5,22 @@ import toast from "react-hot-toast";
 import { getAxiosInstance } from "../common/axios-helper";
 import { SERVER_URL } from "../common/axios-helper";
 import { addToOrder } from "../common/add-to-order";
+import { useNavigate } from "react-router-dom";
 
 const SingleProduct = () => {
   const [singleProduct, setSingleProduct] = useState<Product | null>(null);
   const params = useParams<{ id: string }>();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchSingleProduct = async () => {
-      const response = await getAxiosInstance()(`/products/${params.id}`).catch((error) => {
-        if (error.response && error.response.status === 401) {
-          window.location.href = "/login";
+      const response = await getAxiosInstance()(`/products/${params.id}`).catch(
+        (error) => {
+          if (error.response && error.response.status === 401) {
+            navigate("/login");
+          }
         }
-      });
+      );
       const data = await response?.data;
       console.log(data);
 
@@ -29,7 +33,6 @@ const SingleProduct = () => {
   const handleAddToCart = () => {
     addToOrder(Number(singleProduct?.id ?? 0), singleProduct?.price ?? 0);
     toast.success("Product added to the cart");
-
   };
 
   return (
@@ -37,7 +40,7 @@ const SingleProduct = () => {
       <div className="grid grid-cols-3 gap-x-8 max-lg:grid-cols-1">
         <div className="lg:col-span-2">
           <img
-            src={`${SERVER_URL}/${singleProduct?.img}`}
+            src={`${SERVER_URL}${singleProduct?.img}`}
             alt={singleProduct?.name}
             className="full-size-image"
           />
@@ -47,13 +50,11 @@ const SingleProduct = () => {
             <h1 className="text-4xl">{singleProduct?.name}</h1>
 
             <div className="flex justify-between items-center">
-              <p className="text-base text-secondaryBrown">
-              </p>
+              <p className="text-base text-secondaryBrown"></p>
               <p className="text-base font-bold">₪{singleProduct?.price}</p>
             </div>
           </div>
-          <div className="flex flex-col gap-2">
-          </div>
+          <div className="flex flex-col gap-2"></div>
           <div className="flex flex-col gap-3">
             <Button mode="brown" text="Add to cart" onClick={handleAddToCart} />
             <p className="text-secondaryBrown text-sm text-right">

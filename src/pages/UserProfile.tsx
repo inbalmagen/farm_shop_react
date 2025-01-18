@@ -11,6 +11,7 @@ const UserProfile = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState<User>();
 
+
   const logout = () => {
     toast.error("Logged out successfully");
     localStorage.removeItem("user");
@@ -21,7 +22,7 @@ const UserProfile = () => {
   const fetchUser = async (userId: number | string) => {
     const response = await getAxiosInstance()(`/users/${userId}`).catch((error) => {
       if (error.response && error.response.status === 401) {
-        window.location.href = "/login";
+        navigate("/login");
       }
     });
     setUser(response?.data);

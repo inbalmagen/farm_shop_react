@@ -1,18 +1,16 @@
 import { getAxiosInstance } from "./axios-helper";
+import { useNavigate } from "react-router-dom";
+
+
 
 async function addToOrder(productId: number, productPrice: number) {
-  const token = localStorage.getItem("access_token");
-  if (!token) {
-    window.location.href = "login.html";
-    return;
-  }
-
   const axiosInstance = getAxiosInstance();
 
   try {
     const response = await axiosInstance.get(`/orders/open/`).catch((error) => {
+      const navigate = useNavigate();
       if (error.response && error.response.status === 401) {
-        window.location.href = "/login";
+        navigate("/login");
       }
     });
     let orderId;

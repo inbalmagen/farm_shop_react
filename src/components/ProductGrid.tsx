@@ -14,7 +14,7 @@ const ProductGrid = ({ products }: { products?: Product[] }) => {
           <ProductItem
             key={nanoid()}
             id={product.id}
-            image={`${SERVER_URL}/${product.img}`}
+            image={`${SERVER_URL}${product.img}`}
             title={product.name}
             category="luxury"
             price={product.price}

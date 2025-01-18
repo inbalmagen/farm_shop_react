@@ -7,19 +7,22 @@ import toast from "react-hot-toast";
 import { useEffect, useState } from "react";
 import { getAxiosInstance, SERVER_URL } from "../common/axios-helper";
 import { addToOrder } from "../common/add-to-order";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
-
   const [productsInCart, setProductsInCart] = useState<ProductInCart[]>([]);
   const [subtotal, setSubtotal] = useState<number>(0);
+  const navigate = useNavigate();
   const fetchOpenOrders = async () => {
     try {
       const axiosInstance = getAxiosInstance();
-      const response = await axiosInstance.get("/orders/open/").catch((error) => {
-        if (error.response && error.response.status === 401) {
-          window.location.href = "/login";
-        }
-      });
+      const response = await axiosInstance
+        .get("/orders/open/")
+        .catch((error) => {
+          if (error.response && error.response.status === 401) {
+            navigate("/login");
+          }
+        });
       console.log(response?.data);
       setProductsInCart(response?.data.id ? response?.data.order_products : []);
       setSubtotal(response?.data.total_price ?? 0);
@@ -52,7 +55,7 @@ const Cart = () => {
                 <li key={product.id} className="flex py-6 sm:py-10">
                   <div className="flex-shrink-0">
                     <img
-                      src={`${SERVER_URL}/${product?.product?.img}`}
+                      src={`${SERVER_URL}${product?.product?.img}`}
                       alt={product.name}
                       className="h-24 w-24 object-cover object-center sm:h-48 sm:w-48"
                     />
@@ -99,11 +102,18 @@ const Cart = () => {
                             type="button"
                             className="-m-2 inline-flex p-2 text-gray-400 hover:text-gray-500"
                             onClick={async () => {
-                              await getAxiosInstance().delete(`/orders/order-products/${product?.id}/`).catch((error) => {
-                                if (error.response && error.response.status === 401) {
-                                  window.location.href = "/login";
-                                }
-                              });
+                              await getAxiosInstance()
+                                .delete(
+                                  `/orders/order-products/${product?.id}/`
+                                )
+                                .catch((error) => {
+                                  if (
+                                    error.response &&
+                                    error.response.status === 401
+                                  ) {
+                                    navigate("/login");
+                                  }
+                                });
                               await fetchOpenOrders();
                               toast.error("Product removed from the cart");
                             }}

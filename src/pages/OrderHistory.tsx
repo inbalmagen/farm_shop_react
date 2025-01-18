@@ -1,16 +1,20 @@
 import { useEffect, useState } from "react";
-import { Link, useLoaderData, useNavigate } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { getAxiosInstance } from "../common/axios-helper";
 import { formatDate } from "../utils/formatDate";
 
 export const loader = async () => {
   try {
-    const response = await getAxiosInstance().get("/orders/closed/").catch((error) => {
-      if (error.response && error.response.status === 401) {
-        window.location.href = "/login";
-      }
-    });
-  
+    const response = await getAxiosInstance()
+      .get("/orders/closed/")
+      .catch((error) => {
+        if (error.response && error.response.status === 401) {
+          const navigate = useNavigate();
+          navigate("/login");
+        }
+      });
+
     console.log(response?.data || []);
     return response?.data;
   } catch (error) {
@@ -25,8 +29,7 @@ const OrderHistory = () => {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-  }, [user, navigate]);
+  useEffect(() => {}, [user, navigate]);
 
   return (
     <div className="max-w-screen-2xl mx-auto pt-20 px-5">
@@ -51,7 +54,9 @@ const OrderHistory = () => {
                   {formatDate(order.create_date)}
                 </td>
                 <td className="py-3 px-4 border-b text-center">
-                  {order.close_date ? formatDate(order.close_date ?? "") : "N/A"}
+                  {order.close_date
+                    ? formatDate(order.close_date ?? "")
+                    : "N/A"}
                 </td>
                 <td className="py-3 px-4 border-b text-center">
                   ${order.total_price}

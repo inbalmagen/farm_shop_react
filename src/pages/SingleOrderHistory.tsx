@@ -1,17 +1,15 @@
-import {
-  LoaderFunctionArgs,
-  useLoaderData,
-
-} from "react-router-dom";
+import { LoaderFunctionArgs, useLoaderData } from "react-router-dom";
 import { getAxiosInstance } from "../common/axios-helper";
 import { nanoid } from "nanoid";
 import { formatDate } from "../utils/formatDate";
+import { useNavigate } from "react-router-dom";
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   const { id } = params;
   const response = await getAxiosInstance()(`orders/${id}`).catch((error) => {
     if (error.response && error.response.status === 401) {
-      window.location.href = "/login";
+      const navigate = useNavigate();
+      navigate("/login");
     }
   });
   console.log(response?.data || []);
@@ -28,19 +26,23 @@ const SingleOrderHistory = () => {
         <h2 className="text-2xl font-semibold mb-4">
           Order ID: {singleOrder.id}
         </h2>
-        <p className="mb-2">Create Date: {formatDate(singleOrder.create_date)}</p>
-        <p className="mb-2">Close Date: {singleOrder.close_date ? formatDate(singleOrder.close_date ?? "") : "N/A"}</p>
-        <p className="mb-2">Subtotal: ${singleOrder.total_price}</p>
-       
         <p className="mb-2">
-          Total: $
-          {singleOrder.total_price}
+          Create Date: {formatDate(singleOrder.create_date)}
         </p>
+        <p className="mb-2">
+          Close Date:{" "}
+          {singleOrder.close_date
+            ? formatDate(singleOrder.close_date ?? "")
+            : "N/A"}
+        </p>
+        <p className="mb-2">Subtotal: ${singleOrder.total_price}</p>
+
+        <p className="mb-2">Total: ${singleOrder.total_price}</p>
         <h3 className="text-xl font-semibold mt-6 mb-4">Items</h3>
         <table className="singleOrder-table min-w-full bg-white border border-gray-200">
           <thead>
             <tr>
-              <th className="py-3 px-4 border-b">Product Name</th>          
+              <th className="py-3 px-4 border-b">Product Name</th>
               <th className="py-3 px-4 border-b">Quantity</th>
               <th className="py-3 px-4 border-b">Price</th>
             </tr>
