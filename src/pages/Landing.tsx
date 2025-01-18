@@ -1,9 +1,9 @@
-import { Banner, HomeCollectionSection } from "../components";
+import { HomeCollectionSection } from "../components";
 
 const Landing = () => {
   return (
     <>
-      <Banner />
+      {/* <Banner /> */}
       <HomeCollectionSection />     
     </>
   );

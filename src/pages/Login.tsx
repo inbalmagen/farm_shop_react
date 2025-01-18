@@ -6,7 +6,6 @@ import toast from "react-hot-toast";
 import { useEffect } from "react";
 // import { setLoginStatus } from "../features/auth/authSlice";
 
-
 const Login = () => {
   const navigate = useNavigate();
 
@@ -35,11 +34,10 @@ const Login = () => {
       // Redirect based on role
       toast.success("You logged in successfully");
       if (isStaff) {
-        navigate("/shop");
+        navigate("/");
         // window.location.href = "admin_products.html";
-
       } else {
-        navigate("/shop");
+        navigate("/");
         // window.location.href = "customer_products.html";
       }
     } catch (error) {
