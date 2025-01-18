@@ -47,7 +47,7 @@ const SingleProduct = () => {
         </div>
         <div className="w-full flex flex-col gap-5 mt-9">
           <div className="flex flex-col gap-2">
-            <h1 className="text-4xl">{singleProduct?.name}</h1>
+            <h1 className="text-4xl text-right">{singleProduct?.name}</h1>
 
             <div className="flex justify-between items-center">
               <p className="text-base text-secondaryBrown"></p>
@@ -62,10 +62,10 @@ const SingleProduct = () => {
             </p>
           </div>
           <div>
-            <section>
-              <h2>תאור המוצר</h2>
-              <p>{singleProduct?.description}</p>
-            </section>
+          <section className="text-right">
+           <h2 className="text-right">תאור המוצר</h2>
+           <p className="text-right">{singleProduct?.description}</p>
+          </section>
           </div>
         </div>
       </div>
