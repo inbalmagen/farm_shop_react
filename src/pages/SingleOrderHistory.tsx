@@ -21,41 +21,35 @@ const SingleOrderHistory = () => {
 
   return (
     <div className="max-w-screen-2xl mx-auto pt-20 px-5">
-      <h1 className="text-3xl font-bold mb-8">Order Details</h1>
-      <div className="bg-white border border-gray-200 p-5 overflow-x-auto">
-        <h2 className="text-2xl font-semibold mb-4">
-          Order ID: {singleOrder.id}
+      <h1 className="text-3xl font-bold mb-8 text-right">פרטי ההזמנה</h1>
+      <div className="bg-white border border-gray-200 p-5 overflow-x-auto text-right">
+        <h2 className="text-2xl font-semibold mb-4 text-right">
+          מספר הזמנה {singleOrder.id}
         </h2>
-        <p className="mb-2">
-          Create Date: {formatDate(singleOrder.create_date)}
+        <p className="mb-2 text-right">
+          תאריך ההזמנה {formatDate(singleOrder.create_date)}
         </p>
-        <p className="mb-2">
-          Close Date:{" "}
-          {singleOrder.close_date
-            ? formatDate(singleOrder.close_date ?? "")
-            : "N/A"}
-        </p>
-        <p className="mb-2">Subtotal: ₪{singleOrder.total_price}</p>
-
-        <p className="mb-2">Total: ₪{singleOrder.total_price}</p>
-        <h3 className="text-xl font-semibold mt-6 mb-4">Items</h3>
-        <table className="singleOrder-table min-w-full bg-white border border-gray-200">
+        <p className="mb-2 text-right">סה"כ ₪{singleOrder.total_price}</p>
+        {/* <h3 className="text-xl font-semibold mt-6 mb-4">Items</h3> */}
+        <table className="min-w-full bg-white border border-gray-200">
           <thead>
             <tr>
-              <th className="py-3 px-4 border-b">Product Name</th>
-              <th className="py-3 px-4 border-b">Quantity</th>
-              <th className="py-3 px-4 border-b">Price</th>
+              <th className="py-3 px-4 border-b text-center">מחיר</th>
+              <th className="py-3 px-4 border-b text-center">כמות</th>
+              <th className="py-3 px-4 border-b text-center"> מוצר</th>
             </tr>
           </thead>
           <tbody>
             {singleOrder.order_products.map((product) => (
               <tr key={nanoid()}>
-                <td className="py-3 px-4 border-b">{product?.product.name}</td>
+                <td className="py-3 px-4 border-b text-center">
+                  ₪{product?.price}
+                </td>
                 <td className="py-3 px-4 border-b text-center">
                   {product?.amount}
                 </td>
-                <td className="py-3 px-4 border-b text-right">
-                ₪{product?.price}
+                <td className="py-3 px-4 border-b text-center">
+                  {product?.product.name}
                 </td>
               </tr>
             ))}

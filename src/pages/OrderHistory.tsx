@@ -33,17 +33,17 @@ const OrderHistory = () => {
 
   return (
     <div className="max-w-screen-2xl mx-auto pt-20 px-5">
-      <h1 className="text-3xl font-bold mb-8">Order History</h1>
+      <h1 className="text-3xl font-bold mb-8 text-right">היסטורית הזמנות</h1>
       <div className="overflow-x-auto">
         <table className="min-w-full bg-white border border-gray-200">
           <thead>
             <tr>
-              <th className="py-3 px-4 border-b">Order ID</th>
-              <th className="py-3 px-4 border-b">Create Date</th>
-              <th className="py-3 px-4 border-b">Close Date</th>
-              <th className="py-3 px-4 border-b">Total</th>
-              <th className="py-3 px-4 border-b">Status</th>
-              <th className="py-3 px-4 border-b">Actions</th>
+              <th className="py-3 px-4 border-b">מספר הזמנה</th>
+              <th className="py-3 px-4 border-b">תאריך ההזמנה</th>
+              {/* <th className="py-3 px-4 border-b">תאריך סגירת הזמנה</th> */}
+              <th className="py-3 px-4 border-b">סה"כ</th>
+              <th className="py-3 px-4 border-b">סטטוס</th>
+              <th className="py-3 px-4 border-b">פרטי ההזמנה</th>
             </tr>
           </thead>
           <tbody>
@@ -53,11 +53,11 @@ const OrderHistory = () => {
                 <td className="py-3 px-4 border-b text-center">
                   {formatDate(order.create_date)}
                 </td>
-                <td className="py-3 px-4 border-b text-center">
+                {/* <td className="py-3 px-4 border-b text-center">
                   {order.close_date
                     ? formatDate(order.close_date ?? "")
                     : "N/A"}
-                </td>
+                </td> */}
                 <td className="py-3 px-4 border-b text-center">
                 ₪{order.total_price}
                 </td>
@@ -69,7 +69,7 @@ const OrderHistory = () => {
                     to={`/order-history/${order.id}`}
                     className="text-blue-500 hover:underline"
                   >
-                    View Details
+                    לפרטי ההזמנה
                   </Link>
                 </td>
               </tr>

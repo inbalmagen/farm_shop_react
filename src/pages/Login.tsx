@@ -42,31 +42,9 @@ const Login = () => {
       }
     } catch (error) {
       console.error("Error:", error);
-      toast.error("Please enter correct email and password");
+      toast.error("בבקשה הכנס שם פרטי, שם משפחה ומספר תעודת זהות");
     }
 
-    // Check if user with the email and password exists
-    //   const users = await customFetch.get("/users");
-    //   let userId: number = 0; // Initialize userId with a default value
-    //   const userExists = users.data.some(
-    //     (user: { id: number; email: string; password: string }) => {
-    //       if (user.email === data.email) {
-    //         userId = user.id;
-    //       }
-    //       return user.email === data.email && user.password === data.password;
-    //     }
-    //   );
-
-    //   // if user exists, show success message
-    //   if (userExists) {
-    //     toast.success("You logged in successfully");
-    //     localStorage.setItem("user", JSON.stringify({ ...data, id: userId }));
-    //     store.dispatch(setLoginStatus(true));
-    //     navigate("/user-profile");
-    //     return;
-    //   } else {
-    //     toast.error("Please enter correct email and password");
-    //   }
   };
 
   useEffect(() => {
@@ -84,35 +62,35 @@ const Login = () => {
         className="max-w-5xl mx-auto flex flex-col gap-5 max-sm:gap-3 items-center justify-center max-sm:px-5"
       >
         <h2 className="text-5xl text-center mb-5 font-thin max-md:text-4xl max-sm:text-3xl max-[450px]:text-xl max-[450px]:font-normal">
-          Welcome Back! Login here:
+        ברוך הבא למשק אלוני יצחק 
         </h2>
         <div className="flex flex-col gap-2 w-full">
           <div className="flex flex-col gap-1">
-            <label htmlFor="name">Your name</label>
+            {/* <label htmlFor="name">שם פרטי ומשפחה </label> */}
             <input
               type="string"
               className="bg-white border border-black text-xl py-2 px-3 w-full outline-none max-[450px]:text-base"
-              placeholder="Enter email address"
+              placeholder="שם פרטי ושם משפחה"
               name="email"
             />
           </div>
           <div className="flex flex-col gap-1">
-            <label htmlFor="name">Your Employee Number</label>
+            {/* <label htmlFor="name">מספר תעודת זהות</label> */}
             <input
               type="password"
               className="bg-white border border-black text-xl py-2 px-3 w-full outline-none max-[450px]:text-base"
-              placeholder="Enter password"
+              placeholder="מספר תעודת זהות"
               name="password"
             />
           </div>
         </div>
-        <Button type="submit" text="Login" mode="brown" />
+        <Button type="submit" text="כניסה למשק" mode="brown" />
         <Link
           to="/register"
           className="text-xl max-md:text-lg max-[450px]:text-sm"
         >
-          Don’t have an account?{" "}
-          <span className="text-secondaryBrown">Register now</span>.
+          {/* Don’t have an account?{" "}
+          <span className="text-secondaryBrown">Register now</span>. */}
         </Link>
       </form>
     </div>
