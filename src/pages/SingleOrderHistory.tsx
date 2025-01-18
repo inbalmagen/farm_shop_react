@@ -35,9 +35,9 @@ const SingleOrderHistory = () => {
             ? formatDate(singleOrder.close_date ?? "")
             : "N/A"}
         </p>
-        <p className="mb-2">Subtotal: ${singleOrder.total_price}</p>
+        <p className="mb-2">Subtotal: ₪{singleOrder.total_price}</p>
 
-        <p className="mb-2">Total: ${singleOrder.total_price}</p>
+        <p className="mb-2">Total: ₪{singleOrder.total_price}</p>
         <h3 className="text-xl font-semibold mt-6 mb-4">Items</h3>
         <table className="singleOrder-table min-w-full bg-white border border-gray-200">
           <thead>
@@ -55,7 +55,7 @@ const SingleOrderHistory = () => {
                   {product?.amount}
                 </td>
                 <td className="py-3 px-4 border-b text-right">
-                  ${product?.price}
+                ₪{product?.price}
                 </td>
               </tr>
             ))}

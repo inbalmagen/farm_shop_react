@@ -10,9 +10,9 @@ const   Header = () => {
     <div className="flex-1 flex justify-center">
           <Link
             to="/"
-            className="text-5xl font-light tracking-[1.08px] max-sm:text-4xl max-[400px]:text-2xl"
+            className="text-5xl font-bold tracking-wide max-sm:text-4xl max-[400px]:text-3xl"
           >
-            משק חקלאי אלוני יצחק
+           משק חקלאי   
           </Link>
         </div>
       {/* <Link

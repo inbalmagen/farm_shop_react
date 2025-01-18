@@ -59,7 +59,7 @@ const OrderHistory = () => {
                     : "N/A"}
                 </td>
                 <td className="py-3 px-4 border-b text-center">
-                  ${order.total_price}
+                ₪{order.total_price}
                 </td>
                 <td className="py-3 px-4 border-b text-center">
                   {order.status}

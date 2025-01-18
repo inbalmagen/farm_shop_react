@@ -75,7 +75,7 @@ const Cart = () => {
                           </h3>
                         </div>
                         <p className="mt-1 text-sm font-medium text-gray-900">
-                          ${product.price}
+                        ₪{product.price}
                         </p>
                       </div>
 
