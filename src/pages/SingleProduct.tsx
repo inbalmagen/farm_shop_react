@@ -56,14 +56,14 @@ const SingleProduct = () => {
           </div>
           <div className="flex flex-col gap-2"></div>
           <div className="flex flex-col gap-3">
-            <Button mode="brown" text="Add to cart" onClick={handleAddToCart} />
+            <Button mode="brown" text="הוסף לעגלה" onClick={handleAddToCart} />
             <p className="text-secondaryBrown text-sm text-right">
-              Delivery estimated one day after closing the order.
+              המשלוח יהיה מוכן כיום לאחר סגירת ההזמנה
             </p>
           </div>
           <div>
             <section>
-              <h2>Description</h2>
+              <h2>תאור המוצר</h2>
               <p>{singleProduct?.description}</p>
             </section>
           </div>

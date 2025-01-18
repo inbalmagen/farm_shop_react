@@ -10,9 +10,9 @@ const ShopFilterAndSort = ({
   const { showingProducts, totalProducts } = useAppSelector(state => state.shop)
   return (
     <div className="flex justify-between items-center px-5 max-sm:flex-col max-sm:gap-5">
-      <p className="text-lg">Showing 1–{ showingProducts } of { totalProducts } results</p>
+      <p className="text-lg">פריטים לצפיה 1–{ showingProducts } מתוך { totalProducts } תוצאות</p>
       <div className="flex gap-3 items-center">
-        <p>Sort by:</p>
+        <p>מיון הפריטים</p>
         <div className="relative">
           <select
             className="border border-[rgba(0,0,0,0.40)] px-2 py-1"
@@ -21,10 +21,10 @@ const ShopFilterAndSort = ({
             }
             value={sortCriteria}
           >
-            <option value="default">Default</option>
-            <option value="popularity">Popularity</option>
-            <option value="price-asc">Price: low to high</option>
-            <option value="price-desc">Price: high to low</option>
+            <option value="default">ברירת מחדל</option>
+            {/* <option value="popularity">Popularity</option> */}
+            <option value="price-asc">מחיר: נמוך לגבוה</option>
+            <option value="price-desc">מחיר: גבוה לנמוך</option>
           </select>
         </div>
       </div>

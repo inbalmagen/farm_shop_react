@@ -10,7 +10,7 @@ const SocialMediaFooter = () => {
   return (
     <div className="mx-auto max-w-screen-2xl">
     <div className="bg-gray-600 flex justify-center items-center flex-col py-9 gap-3 mt-24 mx-5 max-[400px]:mx-3">
-      <p className="text-base text-white font-light">Follow us on:</p>
+      <p className="text-base text-white font-light">עקבו אחרינו</p>
       <div className="flex gap-2 text-white">
         <FaFacebookF className="w-3" />
         <FaInstagram className="w-4" />

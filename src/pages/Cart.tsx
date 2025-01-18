@@ -38,8 +38,8 @@ const Cart = () => {
   return (
     <div className="bg-white mx-auto max-w-screen-2xl px-5 max-[400px]:px-3">
       <div className="pb-24 pt-16">
-        <h1 className="text-3xl tracking-tight text-gray-900 sm:text-4xl">
-          This week order
+      <h1 className="text-3xl tracking-tight text-gray-900 sm:text-4xl text-center">
+          הזמנות לשבוע הקרוב
         </h1>
         <form className="mt-12 lg:grid lg:grid-cols-12 lg:items-start lg:gap-x-12 xl:gap-x-16">
           <section aria-labelledby="cart-heading" className="lg:col-span-7">
@@ -80,7 +80,7 @@ const Cart = () => {
                       </div>
 
                       <div className="mt-4 sm:mt-0 sm:pr-9">
-                        <label htmlFor="quantity mr-5">Quantity: </label>
+                        <label htmlFor="quantity mr-5">כמות ממוצר זה </label>
                         <input
                           type="number"
                           id="quantity"
@@ -156,14 +156,14 @@ const Cart = () => {
               id="summary-heading"
               className="text-lg font-medium text-gray-900"
             >
-              Order summary
+              סיכום הזמנה
             </h2>
 
             <dl className="mt-6 space-y-4">
               <div className="flex items-center justify-between">
-                <dt className="text-sm text-gray-600">Subtotal</dt>
+                <dt className="text-sm text-gray-600">סה"כ</dt>
                 <dd className="text-sm font-medium text-gray-900">
-                  ${subtotal}
+                ₪{subtotal}
                 </dd>
               </div>
             </dl>
@@ -174,7 +174,7 @@ const Cart = () => {
                   to="/"
                   className="text-white bg-gray-500 text-center text-xl font-normal tracking-[0.6px] leading-[72px] w-full h-12 flex items-center justify-center max-md:text-base"
                 >
-                  Continue shopping
+                  המשך קניה
                 </Link>
               </div>
             )}
