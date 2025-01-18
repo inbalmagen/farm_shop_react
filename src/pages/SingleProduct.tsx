@@ -1,6 +1,6 @@
 import { Button } from "../components";
 import { useParams } from "react-router-dom";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { getAxiosInstance } from "../common/axios-helper";
 import { SERVER_URL } from "../common/axios-helper";

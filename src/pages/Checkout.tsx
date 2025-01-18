@@ -432,10 +432,10 @@ const Checkout = () => {
                             {product?.name}
                           </h4>
                           <p className="mt-1 text-sm text-gray-500">
-                            {product?.color}
+                            {/* {product?.color} */}
                           </p>
                           <p className="mt-1 text-sm text-gray-500">
-                            {product?.size}
+                            {/* {product?.size} */}
                           </p>
                         </div>
 
@@ -462,7 +462,7 @@ const Checkout = () => {
 
                         <div className="ml-4">
                           <p className="text-base">
-                            Quantity: {product?.quantity}
+                            {/* Quantity: {product?.quantity} */}
                           </p>
                         </div>
                       </div>
