@@ -5,6 +5,7 @@ import {
   setShowingProducts,
   setTotalProducts,
 } from "../features/shop/shopSlice";
+import { useNavigate } from "react-router-dom";
 
 const ProductGridWrapper = ({
   searchQuery,
@@ -26,6 +27,7 @@ const ProductGridWrapper = ({
   const [products, setProducts] = useState<Product[]>([]);
   const { totalProducts } = useAppSelector((state) => state.shop);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   // Memoize the function to prevent unnecessary re-renders
   // getSearchedProducts will be called only when searchQuery or sortCriteria changes
@@ -36,7 +38,8 @@ const ProductGridWrapper = ({
       }
       const response = await getAxiosInstance()("/products/").catch((error) => {
         if (error.response && error.response.status === 401) {
-          window.location.href = "/login";
+          // window.location.href = "/login";
+          navigate("/login");
         }
       });
       const allProducts = await response?.data;
